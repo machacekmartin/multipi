@@ -4,7 +4,7 @@
 3. Execute sudo bash run.sh
 4. Put the SD card into your PI
 4. Start the PI. LibreELEC will be mounted, because it is marked as the first default in autoboot.txt
-5. Install Arctic Horizon 2 skin
+5. Install Arctic Horizon 2 skin: https://jurialmunkey.github.io/repository.jurialmunkey/
 6. Add new Power Menu item with custom action labeled Batocera: System.Exec(/flash/reboot/reboot_into_batocera.sh)
 7. Press this button and pi will reboot into Batocera
 8. After your Pi boots into Batocera, press F1 and start terminal in Applications
