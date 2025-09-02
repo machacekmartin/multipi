@@ -31,36 +31,40 @@ LIBREELEC_BOOT_PARTITION_UUID="${LIBREELEC_BOOT_PARTITION_IDENTIFIER:0:4}-${LIBR
 LIBREELEC_ROOT_PARTITION_UUID=$(sudo dd if="$DISK"s5 bs=1m count=10 | file - | grep -Eo 'UUID=[0-9a-fA-F-]+' | cut -d= -f2)
 echo "--- Retrieved UUIDs of partitions ---"
 
-curl -L -o ./images/libreelec_12.2.0.img.gz https://releases.libreelec.tv/LibreELEC-RPi5.aarch64-12.2.0.img.gz
+diskutil unmountDisk $DISK
 
-gzip -dc ./images/libreelec_12.2.0.img.gz | sudo dd of="$DISK"s4 bs=4m status=progress
+#curl batocera
+curl -L -o ./images/libreelec.img.gz https://releases.libreelec.tv/LibreELEC-RPi5.aarch64-12.2.0.img.gz
 
+#gunzip batocera
+gunzip ./images/libreelec.img.gz
+
+#hdiutil attach batocera
+hdiutil attach ./images/libreelec.img -mountpoint ./images/mounted/libreelec
+
+cp -r ./efi/* /Volumes/EFI
+echo "--- Copied data into EFI partition ---"
 
 # cp -r ./batocera/* /Volumes/BATOCERA_B
 # echo "--- Copied data into BATOCERA_B partition ---"
 
-# cp -r ./libreelec/* /Volumes/LIBREELEC_B
-# echo "--- Copied data into LIBREELEC_B partition ---"
-
-# diskutil mountDisk $DISK
-
-# cp -r ./efi/* /Volumes/EFI
-# echo "--- Copied data into EFI partition ---"
+cp -r ./images/mounted/* /Volumes/LIBREELEC_B
+echo "--- Copied data into LIBREELEC_B partition ---"
 
 # mkdir -p /Volumes/BATOCERA_B/reboot
-# mkdir -p /Volumes/LIBREELEC_B/reboot
+mkdir -p /Volumes/LIBREELEC_B/reboot
 
 # cp -r ./reboot/* /Volumes/BATOCERA_B/reboot
 # echo "--- Copied custom reboot scripts into BATOCERA_B partition ---"
 
-# cp -r ./reboot/* /Volumes/LIBREELEC_B/reboot
-# echo "--- Copied custom reboot scripts into LIBREELEC_B partition ---"
+cp -r ./reboot/* /Volumes/LIBREELEC_B/reboot
+echo "--- Copied custom reboot scripts into LIBREELEC_B partition ---"
 
-# cat <<EOF > /Volumes/LIBREELEC_B/cmdline.txt
-# boot=UUID=$LIBREELEC_BOOT_PARTITION_UUID disk=UUID=$LIBREELEC_ROOT_PARTITION_UUID quiet console=ttyAMA10,115200 console=tty0
-# EOF
+cat <<EOF > /Volumes/LIBREELEC_B/cmdline.txt
+boot=UUID=$LIBREELEC_BOOT_PARTITION_UUID disk=UUID=$LIBREELEC_ROOT_PARTITION_UUID quiet console=ttyAMA10,115200 console=tty0
+EOF
 
-# diskutil unmountDisk $DISK
+diskutil unmountDisk $DISK
 
-# echo "--- DONE ---"
+echo "--- DONE ---"
 
