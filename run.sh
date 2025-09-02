@@ -29,12 +29,14 @@ diskutil mountDisk $DISK
 
 ################ RETRIEVE IMAGES ################
 if [ -f ./images/downloaded/batocera.img ]; then
+    echo "Batocera image already exists"
 else
     curl -L -o ./images/downloaded/batocera.img.gz https://updates.batocera.org/bcm2712/stable/last/batocera-bcm2712-41-20241217.img.gz
     gunzip ./images/downloaded/batocera.img.gz
 fi
 
 if [ -f ./images/downloaded/libreelec.img ]; then
+    echo "LibreELEC image already exists"
 else
     curl -L -o ./images/downloaded/libreelec.img.gz https://releases.libreelec.tv/LibreELEC-RPi5.aarch64-12.2.0.img.gz
     gunzip ./images/downloaded/libreelec.img.gz
