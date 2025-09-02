@@ -1,1 +1,7 @@
-images/*
+images/downloaded/*
+images/mounted/batocera/*
+images/mounted/libreelec/*
+
+!images/downloaded/.gitkeep
+!images/mounted/batocera/.gitkeep
+!images/mounted/libreelec/.gitkeep
