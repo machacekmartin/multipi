@@ -5,3 +5,6 @@ images/mounted/libreelec/*
 !images/downloaded/.gitkeep
 !images/mounted/batocera/.gitkeep
 !images/mounted/libreelec/.gitkeep
+
+presets/*
+!presets/.gitkeep
