@@ -8,7 +8,7 @@ mount -t vfat $EFI_PARTITION $EFI_MOUNT
 
 cat > $EFI_MOUNT/autoboot.txt<< EOF
 [all]
-boot_partition=4
+boot_partition=2
 EOF
 
 umount $EFI_MOUNT

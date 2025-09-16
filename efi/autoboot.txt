@@ -1,2 +1,2 @@
 [all]
-boot_partition=4
+boot_partition=2
