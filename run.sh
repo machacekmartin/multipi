@@ -7,7 +7,7 @@ diskutil unmountDisk $DISK
 ################ PURGE AND CREATE PARTITIONS ################
 sudo diskutil partitionDisk $DISK GPT \
     "MS-DOS FAT32" BATOCERA_B 4GB \
-    "ExFAT" BATOCERA_R 32GB \
+    "ExFAT" BATOCERA_R 64GB \
     "MS-DOS FAT32" LIBREELEC_B 4GB \
     "ExFAT" LIBREELEC_R 32GB \
     "Free Space" Free R
